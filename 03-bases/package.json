@@ -11,10 +11,12 @@
   "author": "luis felipe",
   "license": "ISC",
   "devDependencies": {
+    "axios": "^1.8.4",
     "nodemon": "^3.1.9"
   },
   "dependencies": {
     "get-age": "^1.0.1",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "winston": "^3.17.0"
   }
 }

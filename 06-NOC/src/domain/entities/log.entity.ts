@@ -6,6 +6,13 @@ export enum LogSeveryLevel {
     high        = 'high'
 }
 
+export interface LogEntityOptions {
+    level:      LogSeveryLevel;
+    message:    string;
+    createAt?:   Date;
+    origin:     string;
+}
+
 
 
 export class LogEntity {
@@ -13,25 +20,51 @@ export class LogEntity {
     public level: LogSeveryLevel;
     public message: string;
     public createAt: Date;
+    public origin: string;
 
 
     constructor(
-        message:string, level:LogSeveryLevel
+        options: LogEntityOptions
     ){
+        const { message, level, createAt = new Date(), origin } = options
         this.message = message;
         this.level = level;
-        this.createAt = new Date();
+        this.createAt = createAt;
+        this.origin = origin;
     }
 
-    static fromJson = ( json: string ):LogEntity => {
-       const { message, level, createAt } =  JSON.parse(json);
+    static fromJson = ( json: string  ):LogEntity => {
+
+        json = ( json === '' )? '{}': json;
+
+       const { message, level, createAt, origin } =  JSON.parse(json);
         if( !message) throw new Error("Message is required");
 
-        const log = new LogEntity(message, level);
+        const log = new LogEntity({
+            message,
+            level, 
+            createAt,
+            origin
+        });
         log.createAt = new Date(createAt);
         return log; 
 
     }
+
+    static fromObject = (object: {[key: string]: any}): LogEntity => {
+        
+        const { message, level, createAt, origin } = object;
+        
+        const log = new LogEntity({
+            message,
+            level,
+            createAt,
+            origin
+        })
+    
+        return log;
+    }
+
 }
 
 

@@ -1,5 +1,7 @@
 
 import { envs } from "./config/plugins/envs.plugin";
+import { LogModel, MongoDatabase } from "./data/mongo";
+import { PrismaClient } from "./generated/prisma";
 import { Server } from "./presentation/server";
 
 (async() => {
@@ -11,11 +13,17 @@ import { Server } from "./presentation/server";
 
 
 
-function main(){
+async function main(){
+
+    await MongoDatabase.connect({
+        mongoUrl: envs.MONGO_URL,
+        dbName: envs.MONGO_DB_NAME
+    });    
 
 
-    // Server.start()
-    console.log( envs.PORT );
+
+    Server.start()
+    // console.log( envs.PORT );
     
 
 }

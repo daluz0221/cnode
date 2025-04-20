@@ -24,7 +24,7 @@ export class CheckServiceMultiple implements checkServiceMultipleUseCase {
             logRepository.saveLog( log )
         });
     }
-
+ 
 
     public async execute( url:string ):Promise<boolean>{
 

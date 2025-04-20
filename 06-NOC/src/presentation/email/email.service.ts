@@ -4,14 +4,14 @@ import { LogRepository } from "../../domain/repository/log.repository";
 import { LogEntity, LogSeveryLevel } from "../../domain/entities/log.entity";
 
 
-interface sendMailOptions {
+export interface sendMailOptions {
     to: string | string[];
     subject: string;
     htmlBody: string;
     attachments?: Attachments[]
 }
 
-interface Attachments{
+export interface Attachments{
     filename: string;
     path: string;
 }

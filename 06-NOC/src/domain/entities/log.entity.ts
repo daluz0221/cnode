@@ -37,8 +37,8 @@ export class LogEntity {
 
         json = ( json === '' )? '{}': json;
 
-       const { message, level, createAt, origin } =  JSON.parse(json);
-        if( !message) throw new Error("Message is required");
+        const { message, level, createAt, origin } =  JSON.parse(json);
+        
 
         const log = new LogEntity({
             message,

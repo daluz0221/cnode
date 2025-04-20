@@ -13,3 +13,9 @@
 */mongo
 
 */postgres
+
+*/postgres-test
+
+*/mongo-test
+
+*.env.*

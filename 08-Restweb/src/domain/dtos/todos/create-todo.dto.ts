@@ -9,6 +9,10 @@ export class CreateTodoDto {
     }
 
     static create( props: {[key:string]: any} ):[string?, CreateTodoDto?]{
+
+        if (!props || typeof props !== 'object') {
+            return ['Cannot process a empty object', undefined];
+        }
         
         const { text } = props
 

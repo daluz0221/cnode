@@ -17,7 +17,8 @@ function main(){
 
     const server = new Server({
         PORT: envs.PORT,
-        routes: AppRoutes.routes
+        routes: AppRoutes.routes,
+        PUBLIC_PATH: envs.PUBLIC_PATH
     });
 
     server.start()

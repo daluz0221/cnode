@@ -140,11 +140,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/hbxuser/luis/udemy/node/08-Restweb/prisma/schema.prisma",
+    "sourceFilePath": "/home/luis/luis/udemy/node/08-Restweb/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",

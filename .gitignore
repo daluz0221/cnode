@@ -18,6 +18,6 @@
 
 */mongo-test
 
-*.env.*
+*.env.test
 
-*/package-lock.json
+*/package-lock.*

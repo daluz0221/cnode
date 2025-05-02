@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
-import { CreateCategoryDto, CustomError } from "../../domain";
+import { CreateCategoryDto, CustomError, PaginationDto } from "../../domain";
+import { CategoryService } from "../services/category.service";
 
 
 
 
 export class CategoryController {
 
-    constructor(){}
+    constructor(
+      private readonly categoryService: CategoryService
+    ){}
 
     private handleError = (error: unknown, res: Response) => {
       if (error instanceof CustomError) {
@@ -19,7 +22,7 @@ export class CategoryController {
       res.status(500).json({error: 'Internal server error'})
     }
 
-    createCategory = async(req: Request, res:Response) => {
+    createCategory = (req: Request, res:Response) => {
         const [error, createCategoryDto] = CreateCategoryDto.create( req.body );
 
         if (error) {
@@ -27,12 +30,27 @@ export class CategoryController {
             return
         }
 
-      res.json(createCategoryDto)
-
+        this.categoryService.createCategory(createCategoryDto!, req.body.user)
+            .then( newCategory => res.status(201).json( newCategory ) )
+            .catch( err => this.handleError(err, res) )
     }
 
     getCategories = async(req: Request, res:Response) => {
-        res.json('get all categories')
+
+      const { page = 1, limit = 5 } = req.query;
+
+      const [error, paginationDto] = PaginationDto.create( +page, +limit );
+
+      if (error) {
+        res.status(400).json({error})
+        return;
+      }
+
+      
+
+      this.categoryService.getCategories( paginationDto! )
+          .then( categories => res.status(200).json( categories ) )
+          .catch( err => this.handleError( err, res ) )
   
       }
 

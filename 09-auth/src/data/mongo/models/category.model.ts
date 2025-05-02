@@ -8,16 +8,17 @@ const categorySchema = new mongoose.Schema({
 
     name: {
         type: String,
-        required:[ true, 'Name is required']
+        required:[ true, 'Name is required'],
+        unique: true,
     },
     available: {
         type: Boolean,
-        default: false
+        default: false,
     },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        require: true
+        require: true,
     }
 
 
